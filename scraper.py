@@ -9,20 +9,25 @@ from kafka import KafkaProducer
 import sys
 import time
 
+# Some statically defined variables.
 url = "http://maven-repository.com/artifact/latest?page={0}"
 date_format = "%Y-%m-%d %H:%M:%S"
 
 
 class MavenRelease:
+    """Represents a Maven Release. """
+
     def __init__(self, group_id, artifact_id, version, date):
         self.group_id = group_id
         self.artifact_id = artifact_id
         self.version = version
         self.date = date
 
+    # Prints a release.
     def printRelease(self):
         print("Release: {0}-{1}-{2}. Uploaded at: {3}".format(self.group_id, self.artifact_id, self.version, self.date))
 
+    # Dumps a Maven Release into JSON format.
     def toJson(self):
         return json.dumps({
             "groupId": self.group_id,
@@ -117,6 +122,12 @@ def produce_to_kafka(topic, servers, until_date):
         return until_date
     return releases[-1].date
 
+class DefaultHelpParser(argparse.ArgumentParser):
+    def error(self, message):
+        sys.stderr.write('error: %s\n' % message)
+        self.print_help()
+        sys.exit(2)
+
 parser = argparse.ArgumentParser("Scrape Maven releases to Kafka.")
 parser.add_argument('start_date', type=lambda s: datetime.datetime.strptime(s, date_format),
                     help="The date to start scraping from. Must be in %Y-%m-%d %H:%M:%S format.")
@@ -126,7 +137,8 @@ parser.add_argument('sleep_time', type=int, help="Time to sleep in between each 
 
 
 def main():
-    args = parser.parse_args(['2019-06-24 14:05:50', 'cf_mvn_releases', 'localhost:29092', '60'])
+    args = parser.parse_args()
+
 
     kafka_topic = args.topic
     latest_date = args.start_date

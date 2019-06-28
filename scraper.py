@@ -6,7 +6,6 @@ import datetime
 import json
 import argparse
 from kafka import KafkaProducer
-import sys
 import time
 
 # Some statically defined variables.

@@ -123,7 +123,7 @@ def produce_to_kafka(topic, servers, until_date):
         producer.send(topic, release.to_json())
 
     producer.flush()
-    print("Sent {0} releases.".format(len(releases)))
+    print("{0}: Sent {1} releases.".format(str(datetime.datetime.now()), len(releases)))
 
     # Return latest date (if any new releases are found).
     if len(releases) is 0:

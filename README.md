@@ -33,3 +33,13 @@ Data will be send in the following format:
 }
 ```
 
+## Run in Docker
+```sh
+docker build -t mvn-scraper .
+docker run mvn-scraper '2019-06-24 14:05:50' cf_mvn_releases localhost:29092 60
+```
+or [alternatively](https://hub.docker.com/r/wzorgdrager/mvn-scraper)
+
+```sh
+docker run wzorgdrager/mvn-scraper '2019-06-24 14:05:50' cf_mvn_releases localhost:29092 60
+```

@@ -1,6 +1,6 @@
 # Incremental Maven releases to Kafka
-This Python script scrapes [maven-repository.com](maven-repository) and forwards it to Kafka.
-
+This Python script scrapes [maven-repository.com](maven-repository) and forwards it to Kafka. 
+The scraper script requires: `start_date`, `kafka_topic`, `bootstrap_servers` and `sleeptime`. It will scrape all releases until `start_date` and push this to the `kafka_topic` running on `bootstrap_servers`. It will keep repeating after `sleep_time` seconds with `start_time == date_of_latest_release`. I.e. it scrapes incremental updates on Maven releases.  
 ## Prerequisites
 Install all dependencies:
 ```bash 

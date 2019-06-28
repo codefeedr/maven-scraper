@@ -21,7 +21,7 @@ For example:
 python scraper.py '2019-06-24 14:05:50' cf_mvn_releases localhost:29092 60
 ```
 
-**Note**: `start_date` must be in `%Y-%m-%d %H:%M:%S` format. Multiple bootstrap servers should be `,` separated. Sleep time is in seconds.
+**Note**: `start_date` must be in `%Y-%m-%d %H:%M:%S` format. Multiple bootstrap servers should be `,` separated. Sleep time is in _seconds_.
 ## Sample data
 Data will be send in the following format:
 ```json

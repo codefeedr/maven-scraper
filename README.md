@@ -20,6 +20,7 @@ For example:
 ```sh
 python scraper.py '2019-06-24 14:05:50' cf_mvn_releases localhost:29092 60
 ```
+This will scrape up to `2019-06-24 14:05:50` (+ incremental updates) pushes it to `cf_maven_releases` located at `localhost:29092`. Incremental updates are checked every `60` seconds.   
 
 **Note**: `start_date` must be in `%Y-%m-%d %H:%M:%S` format. Multiple bootstrap servers should be `,` separated. Sleep time is in _seconds_.
 ## Sample data

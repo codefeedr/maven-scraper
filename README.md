@@ -1,9 +1,18 @@
 # Incremental Maven releases to Kafka
-This Python script scrapes [maven-repository.com](maven-repository) and forwards it to Kafka. 
-The scraper script requires: `start_date`, `kafka_topic`, `bootstrap_servers` and `sleeptime`. It will scrape all releases until `start_date` and push this to the `kafka_topic` running on `bootstrap_servers`. It will keep repeating after `sleep_time` seconds with `start_time == date_of_latest_release`. I.e. it scrapes incremental updates on Maven releases.  
+
+**NOTE: This scraper is not working anymore since maven-repository.com
+is down.** 
+
+This Python script scrapes [maven-repository.com](maven-repository) and
+forwards it to Kafka.  The scraper script requires: `start_date`,
+`kafka_topic`, `bootstrap_servers` and `sleeptime`. It will scrape all
+releases until `start_date` and push this to the `kafka_topic` running
+on `bootstrap_servers`. It will keep repeating after `sleep_time`
+seconds with `start_time == date_of_latest_release`. I.e. it scrapes
+incremental updates on Maven releases.   
 ## Prerequisites
 Install all dependencies:
-```bash 
+```bash
 python3 -m venv venv
 . ./venv/bin/activate
 pip install requests BeautifulSoup4 kafka-python
@@ -20,9 +29,12 @@ For example:
 ```sh
 python scraper.py '2019-06-24 14:05:50' cf_mvn_releases localhost:29092 60
 ```
-This will scrape up to `2019-06-24 14:05:50` (+ incremental updates) pushes it to `cf_maven_releases` located at `localhost:29092`. Incremental updates are checked every `60` seconds.   
+This will scrape up to `2019-06-24 14:05:50` (+ incremental updates)
+pushes it to `cf_maven_releases` located at `localhost:29092`.
+Incremental updates are checked every `60` seconds.    
 
-**Note**: `start_date` must be in `%Y-%m-%d %H:%M:%S` format. Multiple bootstrap servers should be `,` separated. Sleep time is in _seconds_.
+**Note**: `start_date` must be in `%Y-%m-%d %H:%M:%S` format. Multiple
+bootstrap servers should be `,` separated. Sleep time is in _seconds_.
 ## Sample data
 Data will be send in the following format:
 ```json
